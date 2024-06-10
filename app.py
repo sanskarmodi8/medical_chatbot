@@ -17,7 +17,8 @@ chain_type_kwargs={
             input_key="question"),
     }
 
-llm = CTransformers(model="model/llama-2-7b-chat.ggmlv3.q8_0.bin",
+llm = CTransformers(model="TheBloke/Llama-2-7B-Chat-GGML",
+                    model_file="llama-2-7b-chat.ggmlv3.q8_0.bin",
                     model_type="llama",
                     config={'max_new_tokens': 512,
                             'temperature': 0.9})
