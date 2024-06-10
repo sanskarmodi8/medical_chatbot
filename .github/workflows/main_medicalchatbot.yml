@@ -1,0 +1,51 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy container app to Azure Web App - medicalchatbot
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Log in to registry
+      uses: docker/login-action@v2
+      with:
+        registry: https://medicalchatbot.azurecr.io/
+        username: ${{ secrets.AzureAppService_ContainerUsername_b4032a0c436e4f2096b2a64cc3cecfba }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_baa155ab99f74eb9a1f4c84cd14d6a89 }}
+
+    - name: Build and push container image to registry
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: medicalchatbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b4032a0c436e4f2096b2a64cc3cecfba }}/medchatbot:${{ github.sha }}
+        file: ./Dockerfile
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'medicalchatbot'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_5dcbf0add9f4416ab7c3b9334b3e1e1e }}
+        images: 'medicalchatbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b4032a0c436e4f2096b2a64cc3cecfba }}/medchatbot:${{ github.sha }}'
