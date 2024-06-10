@@ -15,8 +15,11 @@ list_of_files = [
     "app.py",
     "README.md",
     "requirements.txt",
-    "store_index.py",
+    "src/store_index.py",
     ".gitignore",
+    "static/style.css",
+    "templates/chat.html",
+    "extracted_data.pkl"
 ]
 
 
