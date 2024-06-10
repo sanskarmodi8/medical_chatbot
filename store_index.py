@@ -83,6 +83,5 @@ def langchain_pinecone_from_texts_custom_updated(
             index.upsert(vectors=list(to_upsert), namespace=namespace)
     return Pinecone(index, embedding.embed_query, text_key, namespace)
         
-docsearch_temp = langchain_pinecone_from_texts_custom_updated([t.page_content for t in text_chunks], embeddings, index_name="medical-chatbot")
-docsearch_temp.__class__ = CustomPinecone
-docsearch = docsearch_temp
+docsearch = langchain_pinecone_from_texts_custom_updated([t.page_content for t in text_chunks], embeddings, index_name="medical-chatbot")
+# docsearch.__class__ = CustomPinecone

@@ -1,6 +1,5 @@
-from langchain.vectorstores import Pinecone
+from langchain_pinecone import Pinecone
 from langchain.docstore.document import Document
-
 class CustomPinecone(Pinecone):
     def similarity_search_with_score(self, query, k, filter=None, namespace=None):
         # updated query call
