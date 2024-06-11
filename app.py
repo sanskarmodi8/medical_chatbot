@@ -17,7 +17,8 @@ chain_type_kwargs={
             input_key="question"),
     }
 
-llm = CTransformers(model="model/llama_model.bin",
+llm = CTransformers(model="TheBloke/Llama-2-7B-Chat-GGML",
+                    model_file="llama-2-7b-chat.ggmlv3.q8_0.bin",
                     model_type="llama",
                     config={'max_new_tokens': 512,
                             'temperature': 0.9})
@@ -44,7 +45,7 @@ def chat():
     return str(result)
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=80, debug=True)
+    app.run(host="0.0.0.0", port=80)
     
     
 
