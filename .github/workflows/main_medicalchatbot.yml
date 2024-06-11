@@ -22,15 +22,15 @@ jobs:
     - name: Log in to registry
       uses: docker/login-action@v2
       with:
-        registry: https://medchatreg.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_fb20e4a7aa0e4e1ba51c7e5b790e0bae }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_f0ae2b49ecc14de4871ad7d7154dacc1 }}
+        registry: https://medicalchatbotregistry.azurecr.io/
+        username: ${{ secrets.AzureAppService_ContainerUsername_217ecbc37cdd4dd9a37160a78df4263a }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_29acb3b925cc4f3ba7f024c10f53241c }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: medchatreg.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_fb20e4a7aa0e4e1ba51c7e5b790e0bae }}/medicalchatbotapp:${{ github.sha }}
+        tags: medicalchatbotregistry.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_217ecbc37cdd4dd9a37160a78df4263a }}/medchatapp:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'medicalchatbot'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_cbf55364c1f842eeb4f8bedc58533f28 }}
-        images: 'medchatreg.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_fb20e4a7aa0e4e1ba51c7e5b790e0bae }}/medicalchatbotapp:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_5810568a2b584339ba6136164c449e90 }}
+        images: 'medicalchatbotregistry.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_217ecbc37cdd4dd9a37160a78df4263a }}/medchatapp:${{ github.sha }}'
