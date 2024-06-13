@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 import pickle
 import uuid
-# from src.custom_pinecone import CustomPinecone
+from src.custom_pinecone import CustomPinecone
 
 load_dotenv()
 
@@ -84,4 +84,4 @@ def langchain_pinecone_from_texts_custom_updated(
     return Pinecone(index, embedding.embed_query, text_key, namespace)
         
 docsearch = langchain_pinecone_from_texts_custom_updated([t.page_content for t in text_chunks], embeddings, index_name="medical-chatbot")
-# docsearch.__class__ = CustomPinecone
+docsearch.__class__ = CustomPinecone
