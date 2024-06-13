@@ -5,6 +5,7 @@ langchain-pinecone
 langchain==0.0.225
 flask
 pypdf
+streamlit
 jupyter
 notebook
 python-dotenv
