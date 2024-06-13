@@ -7,7 +7,7 @@ from store_index import docsearch
 import streamlit as st
 
 # Define prompt template and chain type arguments
-PROMPT = PromptTemplate(template=prompt_template, input_variables=["context","chat_history, "question"])
+PROMPT = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
 
 chain_type_kwargs = {
     "prompt": PROMPT,
@@ -109,7 +109,7 @@ def main():
                 st.session_state.chat_history.append({"user": "You", "text": user_input})
 
                 # Call the RetrievalQA chain and get response
-                response = qa.run({"query": user_input})
+                response = qa.run({"query": user_input, "chat_history": st.session_state.chat_history})
                 
                 # Add response to chat history
                 st.session_state.chat_history.append({"user": "Chatbot", "text": response})
