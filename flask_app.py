@@ -8,7 +8,7 @@ from store_index import docsearch
 
 app = Flask(__name__)
 
-PROMPT = PromptTemplate(template=prompt_template, input_variables=["context","chat_history", "question"])
+PROMPT = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
 
 chain_type_kwargs={
         "prompt": PROMPT,
