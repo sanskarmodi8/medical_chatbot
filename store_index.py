@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 import pickle
 import uuid
-from src.custom_pinecone import CustomPinecone
+# from src.custom_pinecone import CustomPinecone
 
 load_dotenv()
 
