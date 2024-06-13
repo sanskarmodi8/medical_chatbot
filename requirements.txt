@@ -1,8 +1,8 @@
-ctransformers==0.2.5
-sentence-transformers==2.2.2
+ctransformers
+sentence-transformers
 pinecone-client
 langchain-pinecone
-langchain==0.0.225
+langchain
 flask
 pypdf
 streamlit
